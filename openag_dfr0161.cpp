@@ -42,7 +42,23 @@
    _send_water_potential_hydrogen = false;
    return res;
 }
+//.......................................Private.......................................//
  
+ float Dfr0161::getData(void){
+   int samples = 40;
+   int voltage[samples];
+   // const int sample_time_delta = 20; // millisecond
+   // Acquire Samples
+   for (int i=0; i<samples; i++){
+     voltage[i] = analogRead(_ph_pin);
+   }
+   // Remove Min & Max Samples, average, Convert to Voltage
+   float volts = averageArray(voltage, samples) * 5.0/1024;
+   // Conver Average Voltage to pH
+   _send_water_potential_hydrogen = true;
+   _water_potential_hydrogen = _ph_calibration_coefficient*volts + _ph_calibration_offset;
+   return _water_potential_hydrogen;
+}
  float Dfr0161::averageArray(int* arr, int number){
    int i;
    int max,min;
@@ -61,7 +77,6 @@
    } //if (number<5)
   
    else {  //first_else
-    
        if(arr[0]<arr[1]){// if(arr[0]<arr[1])
          min = arr[0];
          max = arr[1];
@@ -83,36 +98,14 @@
              amount+=max;
              max=arr[i];
            } //if (arr[i]>max)
-          
            else
            { //fourth_else
              amount+=arr[i];
            } //fourth_else
          } //third_else
        } //for (i=2; i<number; i++)
+    
        avg = (float) amount/(number-2);
      } // first_else 
   return avg;
 } //end of function
-//.......................................Private.......................................//
- 
- float Dfr0161::getData(void){
-   int samples = 40;
-   int voltage[samples];
-   // const int sample_time_delta = 20; // millisecond
-   // Acquire Samples
-   for (int i=0; i<samples; i++){
-     voltage[i] = analogRead(_ph_pin);
-   }
-   
-   // Remove Min & Max Samples, average, Convert to Voltage
-   float volts = averageArray(voltage, samples) * 5.0/1024;
-   
-   // Conver Average Voltage to pH
-   _send_water_potential_hydrogen = true;
-   _water_potential_hydrogen = _ph_calibration_coefficient*volts + _ph_calibration_offset;
-   //Serial2.println(_water_potential_hydrogen);
-   return _water_potential_hydrogen;
-   //ph_raw = _ph_calibration_coefficient*volts + _ph_calibration_offset;
-   //ph_filtered = (float)round(ph_filter_->process(ph_raw)*10)/10;
-}
