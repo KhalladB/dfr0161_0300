@@ -6,7 +6,6 @@
         {
             "type": "int",
             "name": "pin",
-            "default": 1
         }
         ],
     "outputs": {
