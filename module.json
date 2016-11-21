@@ -4,9 +4,9 @@
     "header_file": "openag_dfr0161.h",
     "arguments": [
         {
-            "name": "pin",
             "type": "int",
-            "default": 4
+            "name": "pin",
+            "default": 2
         }
         ],
     "outputs": {
