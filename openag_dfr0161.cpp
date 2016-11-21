@@ -27,7 +27,7 @@
    _time_of_last_reading = 0;
    _ph_calibration_coefficient = 3.5;
    _ph_calibration_offset = -0.1;
-   pinMode(_ph_pin, INPUT);    //declare _ph_pin as an input
+  // pinMode(_ph_pin, INPUT);    //declare _ph_pin as an input
  }
  
  void Dfr0161::update(){
