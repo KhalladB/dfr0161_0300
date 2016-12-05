@@ -36,5 +36,4 @@ class Dfr0161: public Module {
   uint32_t _time_of_last_reading;
   const uint32_t _min_update_interval = 2500;
 };
-
 #endif
