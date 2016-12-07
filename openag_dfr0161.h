@@ -34,6 +34,6 @@ class Dfr0161: public Module {
   float _water_potential_hydrogen;
   bool _send_water_potential_hydrogen;
   uint32_t _time_of_last_reading;
-  const uint32_t _min_update_interval = 2000;
+  const uint32_t _min_update_interval = 200;
 };
 #endif
